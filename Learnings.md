@@ -4,6 +4,6 @@
   monotonic
 
 <h1> To count the number of the subarrays for the range  : </h1>
- ->  [l , r]  is (r - l + 1)   where l is the fixed starting point 
+ ->  [l , r]  is (r - l + 1)   where l is the fixed starting point <br>
  ->  [l , r]   i belongs to [l , r]    where is the fixed points for every subarray then ( i - l + 1 )*( r - i + 1);
  
