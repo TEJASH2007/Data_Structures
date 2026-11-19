@@ -7,3 +7,22 @@
  ->  [l , r]  is (r - l + 1)   where l is the fixed starting point <br>
  ->  [l , r]   i belongs to [l , r]    where is the fixed points for every subarray then ( i - l + 1 )*( r - i + 1);
  
+## 📌 Subarray Properties
+
+### 🔍 Function Behavior
+
+| Function | Behavior as the Subarray Grows |
+|----------|--------------------------------|
+| Bitwise AND (`&`) | Non-increasing (decreases or remains constant) |
+| Bitwise OR (`\|`) | Non-decreasing (increases or remains constant) |
+| Minimum (`min`) | Non-increasing (decreases or remains constant) |
+| Maximum (`max`) | Non-decreasing (increases or remains constant) |
+
+### ⚡ Range Query Optimization
+
+- **Sparse Table**: Efficiently compute range minimum, maximum, bitwise AND, and bitwise OR queries on a static array.
+- **Time Complexity**: `O(1)` per query after `O(n log n)` preprocessing.
+
+### 🧠 Recommended Practice
+
+- [4114. Count Consistent Subarrays II (Hard)](https://leetcode.com/problems/count-consistent-subarrays-ii/description/)
