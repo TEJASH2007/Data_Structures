@@ -199,6 +199,86 @@ After the swap, `a` owns the larger container, so we only insert the elements fr
 
 ---
 
+## Complexity Analysis — Charging Argument
+
+To prove **`O(N log² N)`** clearly in an interview, analyze the movement of a single element rather than examining the tree level-by-level.
+
+This technique is called the **Charging Argument** (or Contribution to the Sum). It makes the complexity proof easier by tracking how frequently an individual element can participate in a merge.
+
+---
+
+### Step 1 : Track One Element's Journey
+
+Instead of asking *"How much work happens at node `u`?"*, ask:
+
+**"How many times is a single color `x` copied from one set to another?"**
+
+1. A color initially belongs to a set of size `1`.
+2. Because of the condition `if (v.size() > u.size()) swap(u, v)`, an element is moved only when it belongs to the smaller set.
+3. When a smaller set merges into a larger set, the resulting set has a size at least twice that of the smaller set.
+
+
+
+---
+
+### Step 2 : Count the Moves per Element
+
+Each time an element is moved, the size of the set containing it at least doubles.
+
+
+
+Since the set size cannot exceed `N`, an element can be moved at most:
+
+
+log N
+
+
+times.
+
+Therefore, every individual element is moved at most:
+
+
+O(log N)
+
+
+times throughout the entire execution.
+
+> **Important:** `std::swap` on two `std::set` objects swaps their internal resources in constant time under compatible allocator conditions. Elements of the larger set are not individually moved during the swap.
+
+---
+
+### Step 3 : Multiply by the Insertion Cost
+
+- There are `N` elements in total.
+- Each element moves at most `O(log N)` times.
+
+Therefore, the total number of insertions caused by merging is:
+
+
+O(Nlog N)
+
+Since we are using `std::set`, each insertion costs:
+
+O(log N)
+
+
+Hence, the total time complexity is:
+
+$$
+\begin{aligned}
+\text{Total Time}
+&= N \times O(log N) \times O(log N)\\
+&= \boxed{O(Nlog^2 N)}
+\end{aligned}
+$$
+
+---
+
+### Summary — Interview Explanation
+
+> Instead of summing the work at every node, I count how many times each element moves. Since we always merge the smaller set into the larger set, every time an element moves, the size of the set containing it at least doubles. Consequently, each of the `N` elements can move at most `O(log N)` times, resulting in `O(N log N)` total insertions. As each insertion into `std::set` costs `O(log N)`, the overall time complexity becomes `O(N log² N)`.
+
+
 ## Tags
 
 `#Trees` `#DFS` `#SmallToLargeMerging` `#SetMerging` `#SubtreeQueries` `#AmortizedAnalysis` `#ChargingArgument` `#ComplexityAnalysis` `#STL` `#Optimization` `#CompetitiveProgramming`
